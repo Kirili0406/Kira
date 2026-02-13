@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кируся ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+
+body{
+ background:black;
+ color:white;
+ overflow:hidden;
+ text-align:center;
+}
+
+/* 🎬 интро */
+#intro{
+ position:fixed;
+ width:100%;
+ height:100vh;
+ background:black;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-direction:column;
+ z-index:9999;
+}
+
+button{
+ padding:15px 25px;
+ border:none;
+ border-radius:30px;
+ background:#ff3d77;
+ color:white;
+ font-size:18px;
+ cursor:pointer;
+ margin-top:20px;
+}
+
+/* 🌌 звезды */
+.star{
+ position:fixed;
+ width:2px;
+ height:2px;
+ background:white;
+}
+
+/* 💬 текст */
+#story{
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ max-width:600px;
+ font-size:26px;
+ line-height:1.6;
+}
+
+/* ❤️ финал */
+#final{
+ position:fixed;
+ width:100%;
+ height:100vh;
+ display:none;
+ justify-content:center;
+ align-items:center;
+ flex-direction:column;
+ background:#000;
+}
+
+.bigHeart{
+ font-size:80px;
+ animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+ 0%{transform:scale(1);}
+ 50%{transform:scale(1.3);}
+ 100%{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+<h1>Для Кируси ❤️</h1>
+<button onclick="start()">Начать историю</button>
+</div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b1d7.mp3?filename=romantic-ambient-110397.mp3">
+</audio>
+
+<div id="story"></div>
+
+<div id="final">
+<div class="bigHeart">💖</div>
+<h1>Кируся… я люблю тебя бесконечно ❤️</h1>
+<p>Спасибо за каждый день с тобой… начиная с 30 января 💌</p>
+</div>
+
+<script>
+
+// 🌌 звезды
+for(let i=0;i<200;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ document.body.appendChild(s);
+}
+
+// 🎬 история
+const texts=[
+"30 января… день когда моя жизнь изменилась…",
+"Я встретил тебя… и всё стало другим…",
+"Каждый день с тобой — это счастье…",
+"Твоя улыбка — мой самый любимый момент…",
+"Кируся… ты моя любовь…",
+"И сегодня я хочу сказать…",
+"Я люблю тебя… больше чем можно описать словами… ❤️"
+];
+
+let index=0;
+let char=0;
+
+function typeText(){
+ if(index>=texts.length){
+  document.getElementById("story").style.display="none";
+  document.getElementById("final").style.display="flex";
+  return;
+ }
+
+ let current=texts[index];
+
+ if(char<current.length){
+  document.getElementById("story").innerHTML+=current.charAt(char);
+  char++;
+  setTimeout(typeText,50);
+ }else{
+  document.getElementById("story").innerHTML+="<br><br>";
+  index++;
+  char=0;
+  setTimeout(typeText,800);
+ }
+}
+
+function start(){
+ document.getElementById("intro").style.display="none";
+ document.getElementById("music").play();
+ typeText();
+}
+
+</script>
+
+</body>
+</html>
